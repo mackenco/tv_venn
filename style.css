@@ -1,0 +1,16 @@
+.values {
+  float:left;
+  padding:20px;
+}
+
+.list {
+  width: 20%;
+  border: 1px solid purple;
+  float: left;
+  padding: 20px 0;
+  height: 200px;
+}
+
+.dynamic {
+  display: inline-block;
+}
