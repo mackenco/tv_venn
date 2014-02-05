@@ -151,6 +151,7 @@
             overlap.sort(sortOrder);
 
             if (overlap.length === 0) {
+                console.log(overlap);
                 throw "Need overlap information for set " + set;
             }
 

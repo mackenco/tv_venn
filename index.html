@@ -35,13 +35,13 @@
     <tr>
       <td>E&#8745C</td>
       <td>
-        <input class="input-mini venn_area" id="0,2" type="number" value="4">
+        <input class="input-mini venn_area" id="1,2" type="number" value="4">
       </td>
     </tr>
     <tr>
       <td>B&#8745C</td>
       <td>
-        <input class="input-mini venn_area" id="1,2" type="number" value="3">
+        <input class="input-mini venn_area" id="0,2" type="number" value="3">
       </td>
     </tr>
     <tr>
@@ -59,7 +59,43 @@
 <script src="http://d3js.org/d3.v2.min.js"></script>
 <script src="venn.js"></script>
 <script src="underscore.min.js"></script>
+<script src="jquery.min.js"></script>
 <script>
+var colin = ["the daily show", "bob's burgers", "new girl", "brooklyn nine-nine",
+            "sherlock", "adventure time", "top chef", "the good wife", "breaking bad",
+            "community", "how i met your mother", "justified", "modern family", 
+            "parks and recreation", "snl"]
+
+var ed = ["fringe", "new girl", "brooklyn nine-nine",
+            "sherlock", "how i met your mother", "modern family", "a", "b", "c", "d"]
+
+var brady = ["bob's burgers", "brooklyn nine-nine", "adventure time",
+            "community", "modern family", "parks and recreation", "snl", "e", "f", "j", "k", "i"]
+
+var c_count = colin.length;
+var e_count = ed.length;
+var b_count = brady.length;
+
+var all = _.intersection(colin, ed, brady);
+var ce = _.intersection(colin, ed);
+var be = _.intersection(ed, brady);
+var bc = _.intersection(colin, brady);
+ce = _.difference(ce, all).length;
+be = _.difference(be, all).length;
+bc = _.difference(bc, all).length;
+all = all.length;
+
+// var ce_count = ce.length;
+
+$("#c").val(c_count);
+$("#e").val(e_count);
+$("#b").val(b_count);
+$("#ce").val(ce);
+$("#be").val(be);
+$("#bc").val(bc);
+$("#all").val(all)
+
+
 function getSetIntersections() {
     areas = d3.selectAll(".venn_area")[0].map(
         function (element) { 
