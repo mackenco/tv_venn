@@ -5,12 +5,24 @@
 
 .list {
   width: 20%;
-  border: 1px solid purple;
   float: left;
   padding: 20px 0;
-  height: 200px;
+}
+
+.active {
+  background-color: #3DB1FF;
 }
 
 .dynamic {
   display: inline-block;
+}
+
+.list {
+  padding-left: 10px;
+}
+
+.list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

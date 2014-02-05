@@ -93,10 +93,23 @@ $("#0-1-2").val(all.length);
 var toVar = {"0": c, "1": e, "2": b, "0-1-2": all, "1-2": bc, "0-1": be, "0-2" :ce };
 
 $(document).ready(function(){
-    $(".input-mini").mouseover(function(){
-      console.log(this.id)
-    console.log(toVar[this.id]);
+    $(".input-mini").mouseenter(function(){
+      var list = toVar[this.id]
+      var $list = $(".list");
+      $list.append("<p>");
+        list.forEach(function(item){
+          $list.append(item + "<br>");
+        });
+      $list.append("</p>");
+      if (list.length > 0) {
+        $list.addClass("active");        
+      }
   });
+
+    $(".input-mini").mouseleave(function(){
+      $(".list").html("");
+      $(".list").removeClass("active");
+    });
 });
 
 function getSetIntersections() {
