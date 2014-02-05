@@ -17,43 +17,43 @@
     <tr>
       <td>E</td>
       <td>
-        <input class="input-mini venn_set" id="e" type="number" value="0">
+        <input class="input-mini venn_set" id="0" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>B</td>
       <td>
-        <input class="input-mini venn_set" id="b" type="number" value="0">
+        <input class="input-mini venn_set" id="1" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>C</td>
       <td>
-        <input class="input-mini venn_set" id="c" type="number" value="0">
+        <input class="input-mini venn_set" id="2" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>E&#8745B</td>
       <td>
-        <input class="input-mini venn_area" id="0,1" type="number" value="1">
+        <input class="input-mini venn_area" id="0-1" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>E&#8745C</td>
       <td>
-        <input class="input-mini venn_area" id="1,2" type="number" value="1">
+        <input class="input-mini venn_area" id="0-2" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>B&#8745C</td>
       <td>
-        <input class="input-mini venn_area" id="0,2" type="number" value="1">
+        <input class="input-mini venn_area" id="1-2" type="number" value="0">
       </td>
     </tr>
     <tr>
       <td>E&#8745B&#8745C&nbsp</td>
       <td>
-        <input class="input-mini venn_area" id="0,1,2" type="number" value="1">
+        <input class="input-mini venn_area" id="0-1-2" type="number" value="0">
       </td>
     </tr>
     </table>
@@ -80,16 +80,17 @@ var ce = _.difference(_.intersection(c, e), all);
 var be = _.difference(_.intersection(e, b), all);
 var bc = _.difference(_.intersection(c, b), all);
 
-$("#c").val(c.length);
-$("#e").val(e.length);
-$("#b").val(b.length);
-$("#0,1").val(ce.length);
-$("#0,2").val(be.length);
-$("#1,2").val(bc.length);
-$("#0,1,2").val(all.length);
+
+$("#0").val(e.length);
+$("#1").val(b.length);
+$("#2").val(c.length);
+$("#0-1").val(be.length);
+$("#0-2").val(ce.length);
+$("#1-2").val(bc.length);
+$("#0-1-2").val(all.length);
 
 //this is the wrong way to do this but don't feel like fixing
-var toVar = {"c": c, "e": e, "b": b, "0,1,2": all, "1,2": ce, "0,1": be, "0,2" :bc };
+var toVar = {"0": c, "1": e, "2": b, "0-1-2": all, "1-2": bc, "0-1": be, "0-2" :ce };
 
 $(document).ready(function(){
     $(".input-mini").mouseover(function(){
@@ -101,7 +102,7 @@ $(document).ready(function(){
 function getSetIntersections() {
     areas = d3.selectAll(".venn_area")[0].map(
         function (element) { 
-            return { sets: element.id.split(",").map(function(value) { return parseInt(value);}), 
+            return { sets: element.id.split("-").map(function(value) { return parseInt(value);}), 
                     size: parseFloat(element.value)};} );
     return areas;
 }
@@ -116,8 +117,8 @@ function getSets() {
 var w = Math.min(450, document.documentElement.clientWidth-30), h = 2*w/3;
 
 // draw the initial set
+
 var sets = venn.venn(getSets(), getSetIntersections());
-console.log($("#0,1").val());
 venn.drawD3Diagram(d3.select(".dynamic"), sets, w, h);
 
 // redraw the sets on any change in input
