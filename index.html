@@ -66,14 +66,14 @@
 var c = ["the daily show", "bob's burgers", "new girl", "brooklyn nine-nine",
             "sherlock", "adventure time", "top chef", "the good wife",
             "community", "how i met your mother", "justified", "modern family", 
-            "parks and recreation", "snl", "broad city", "girls", "eastbound and down"]
+            "parks and recreation", "snl", "broad city", "girls", "eastbound and down"].sort()
 
 var e = ["fringe", "new girl", "brooklyn nine-nine",
-            "sherlock", "how i met your mother", "modern family", "a", "b", "c", "d"]
+            "sherlock", "how i met your mother", "modern family", "a", "b", "c", "d"].sort()
 
 var b = ["bob's burgers", "brooklyn nine-nine", "adventure time",
             "community", "modern family", "parks and recreation", "snl", "rick and morty", 
-            "e", "f", "j", "k", "i", "girls", "eastbound and down"]
+            "e", "f", "j", "k", "i", "girls", "eastbound and down"].sort()
 
 var all = _.intersection(c, e, b);
 var ce = _.difference(_.intersection(c, e), all);
