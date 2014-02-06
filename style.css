@@ -1,7 +1,15 @@
-h1 {
+h1, h2 {
   padding: 0;
   margin: 0;
+}
+
+h1 {
   font-family: 'New Rocker', cursive;
+}
+
+h2 {
+  font-family: 'Balthazar', serif;
+  font-size: 18px;
 }
 
 .values {
