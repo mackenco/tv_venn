@@ -3,58 +3,52 @@
 <head>
     <script src="http://d3js.org/d3.v2.min.js"></script>
     <script src="venn.js"></script>
-    <script src="underscore.min.js"></script>
+    <script src="underscore.min.js"></script> 
     <script src="jquery.min.js"></script>
+<!--     // <script src="/bower_components/d3/d3.js"></script>
+    // <script src="/bower_components/venn/venn.min.js"></script>
+    // <script src="/bower_components/underscore"></script>
+    // <script src="/bower_components/jquery/jquery.js"></script> -->
+
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=New+Rocker' rel='stylesheet' type='text/css'> 
+    <link href='http://fonts.googleapis.com/css?family=Balthazar' rel='stylesheet' type='text/css'>   
     <meta charset="utf-8">
     <title>The TV Shows of 2L</title>
 </head>
 
 <body>
+  <h1>The TV Shows of 2L</h1>
 <div class="list"></div>
 <div class="values">
     <table>
-    <tr>
+    <tr class="test">
       <td>E</td>
-      <td>
-        <input class="input-mini venn_set" id="0" type="number" value="0">
-      </td>
+      <td class="show-num venn_set" id="0" value="0"></td>
     </tr>
     <tr>
       <td>B</td>
-      <td>
-        <input class="input-mini venn_set" id="1" type="number" value="0">
-      </td>
+      <td class="show-num venn_set" id="1" value="0"></td>
     </tr>
     <tr>
       <td>C</td>
-      <td>
-        <input class="input-mini venn_set" id="2" type="number" value="0">
-      </td>
+      <td class="show-num venn_set" id="2" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745B</td>
-      <td>
-        <input class="input-mini venn_area" id="0-1" type="number" value="0">
-      </td>
+      <td class="show-num venn_area" id="0-1" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745C</td>
-      <td>
-        <input class="input-mini venn_area" id="0-2" type="number" value="0">
-      </td>
+      <td class="show-num venn_area" id="0-2" value="0"></td>
     </tr>
     <tr>
       <td>B&#8745C</td>
-      <td>
-        <input class="input-mini venn_area" id="1-2" type="number" value="0">
-      </td>
+      <td class="show-num venn_area" id="1-2" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745B&#8745C&nbsp</td>
-      <td>
-        <input class="input-mini venn_area" id="0-1-2" type="number" value="0">
-      </td>
+      <td class="show-num venn_area" id="0-1-2" value="0"></td>
     </tr>
     </table>
 </div>
@@ -63,6 +57,8 @@
 
 </body>
 <script>
+//inputs should be a text area with the a comma separated list, as we add to them, intersections are updated on the fly
+
 var c = ["the daily show", "bob's burgers", "new girl", "brooklyn nine-nine",
             "sherlock", "adventure time", "top chef", "the good wife",
             "community", "how i met your mother", "justified", "modern family", 
@@ -73,40 +69,36 @@ var e = ["fringe", "new girl", "brooklyn nine-nine",
 
 var b = ["bob's burgers", "brooklyn nine-nine", "adventure time",
             "community", "modern family", "parks and recreation", "snl", "rick and morty", 
-            "e", "f", "j", "k", "i", "girls", "eastbound and down"].sort()
+            "e", "fringe", "j", "k", "i", "girls", "eastbound and down"].sort()
 
 var all = _.intersection(c, e, b);
 var ce = _.difference(_.intersection(c, e), all);
 var be = _.difference(_.intersection(e, b), all);
 var bc = _.difference(_.intersection(c, b), all);
 
-
-$("#0").val(e.length);
-$("#1").val(b.length);
-$("#2").val(c.length);
-$("#0-1").val(be.length);
-$("#0-2").val(ce.length);
-$("#1-2").val(bc.length);
-$("#0-1-2").val(all.length);
+$("#0").val(e.length).html(e.length);
+$("#1").val(b.length).html(b.length);
+$("#2").val(c.length).html(c.length);
+$("#0-1").val(be.length).html(be.length);
+$("#0-2").val(ce.length).html(ce.length);
+$("#1-2").val(bc.length).html(bc.length);
+$("#0-1-2").val(all.length).html(all.length);
 
 //this is the wrong way to do this but don't feel like fixing
-var toVar = {"0": c, "1": e, "2": b, "0-1-2": all, "1-2": bc, "0-1": be, "0-2" :ce };
+var toVar = {"0": e, "1": b, "2": c, "0-1-2": all, "1-2": bc, "0-1": be, "0-2" :ce };
 
 $(document).ready(function(){
-    $(".input-mini").mouseenter(function(){
-      var list = toVar[this.id]
+    $("tr").mouseenter(function(){
+      $el = $(this).children(".show-num")[0];
+      var list = toVar[$el.id]
       var $list = $(".list");
       $list.append("<p>");
-        list.forEach(function(item){
-          $list.append(item + "<br>");
-        });
+      list.forEach(function(item){ $list.append(item + "<br>"); });
       $list.append("</p>");
-      if (list.length > 0) {
-        $list.addClass("active");        
-      }
+      if (list.length > 0) { $list.addClass("active"); }
   });
 
-    $(".input-mini").mouseleave(function(){
+    $("tr").mouseleave(function(){
       $(".list").html("");
       $(".list").removeClass("active");
     });

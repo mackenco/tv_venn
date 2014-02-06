@@ -1,28 +1,35 @@
+h1 {
+  padding: 0;
+  margin: 0;
+  font-family: 'New Rocker', cursive;
+}
+
 .values {
   float:left;
-  padding:20px;
+  padding:10px;
 }
 
 .list {
   width: 20%;
   float: left;
-  padding: 20px 0;
+  padding: 1px 10px 1px 10px;
 }
 
 .active {
-  background-color: #3DB1FF;
+  background-color: #F2BDBE;
 }
 
 .dynamic {
   display: inline-block;
 }
 
-.list {
-  padding-left: 10px;
-}
-
 .list ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+body {
+  font-size: 18px;
+  font-family: 'Balthazar', serif;
 }
