@@ -19,33 +19,33 @@
 <div class="list"></div>
 <div class="values">
     <table>
-    <tr>
+    <tr class="test">
       <td>E</td>
-      <td class="input-mini venn_set" id="0" value="0"></td>
+      <td class="show-num venn_set" id="0" value="0"></td>
     </tr>
     <tr>
       <td>B</td>
-      <td class="input-mini venn_set" id="1" value="0"></td>
+      <td class="show-num venn_set" id="1" value="0"></td>
     </tr>
     <tr>
       <td>C</td>
-      <td class="input-mini venn_set" id="2" value="0"></td>
+      <td class="show-num venn_set" id="2" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745B</td>
-      <td class="input-mini venn_area" id="0-1" value="0"></td>
+      <td class="show-num venn_area" id="0-1" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745C</td>
-      <td class="input-mini venn_area" id="0-2" value="0"></td>
+      <td class="show-num venn_area" id="0-2" value="0"></td>
     </tr>
     <tr>
       <td>B&#8745C</td>
-      <td class="input-mini venn_area" id="1-2" value="0"></td>
+      <td class="show-num venn_area" id="1-2" value="0"></td>
     </tr>
     <tr>
       <td>E&#8745B&#8745C&nbsp</td>
-      <td class="input-mini venn_area" id="0-1-2" value="0"></td>
+      <td class="show-num venn_area" id="0-1-2" value="0"></td>
     </tr>
     </table>
 </div>
@@ -85,20 +85,17 @@ $("#0-1-2").val(all.length).html(all.length);
 var toVar = {"0": e, "1": b, "2": c, "0-1-2": all, "1-2": bc, "0-1": be, "0-2" :ce };
 
 $(document).ready(function(){
-    $(".input-mini").mouseenter(function(){
-      var list = toVar[this.id]
+    $("tr").mouseenter(function(){
+      $el = $(this).children(".show-num")[0];
+      var list = toVar[$el.id]
       var $list = $(".list");
       $list.append("<p>");
-        list.forEach(function(item){
-          $list.append(item + "<br>");
-        });
+      list.forEach(function(item){ $list.append(item + "<br>"); });
       $list.append("</p>");
-      if (list.length > 0) {
-        $list.addClass("active");        
-      }
+      if (list.length > 0) { $list.addClass("active"); }
   });
 
-    $(".input-mini").mouseleave(function(){
+    $("tr").mouseleave(function(){
       $(".list").html("");
       $(".list").removeClass("active");
     });
